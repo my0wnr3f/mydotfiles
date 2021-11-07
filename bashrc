@@ -48,16 +48,6 @@ esac
 
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
-echo "Subjects:"
-echo "	Math, Geometry, Physics, Informatics, Chemistry, Russian"
-
-echo "TimeTable of my exercises :"
-
-echo "       |Mon    |Tue    |Wed    |Thu    |Fri    |Sat    |Sun"
-echo "       |-------|-------|-------|-------|-------|-------|----"	
-echo "       |Math   |Math   |Math   |Math   |Chem   |Russ   |Phys"
-echo "       |Phys   |Info   |Phys   |Info   |Russ   |Chem   |Info"
-
 export LESSHISTFILE="-"
 export GTK2_RC_FILES="/home/l1l0/.config/gtk-2.0/gtkrc-2.0"
 export HOME="/home/l1l0"
