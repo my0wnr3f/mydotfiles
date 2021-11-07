@@ -1,0 +1,95 @@
+set $mod Mod4
+
+font pango:UbuntuMono Nerd Font Mono 12px
+
+# TODO : wtf is this? x1
+exec --no-startup-id dex --autostart --environment i3
+
+# TODO : wtf is this? x2
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+set $refresh_i3status killall -SIGUSR1 i3status
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# TODO : wtf is this x3 
+floating_modifier $mod
+
+bindsym $mod+Return exec alacritty 
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+p exec "maim --select | xclip -selection clipboard -target image/png" 
+bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+b exec --no-startup-id firefox
+bindsym $mod+p exec --no-startup-id pcmanfm
+bindsym $mod+g exec --no-startup-id gimp
+
+set $left  h
+set $right l
+set $up    k
+set $down  j
+
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$left  move left
+bindsym $mod+Shift+$down  move down
+bindsym $mod+Shift+$up    move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+f           fullscreen toggle
+bindsym $mod+w           layout tabbed
+bindsym $mod+e           layout toggle split
+bindsym $mod+Shift+space floating toggle
+
+set $ws1 "1" 
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Ya!' 'i3-msg exit'"
+
+mode "resize" {
+        bindsym $left resize shrink width 10 px or 10 ppt
+        bindsym $down resize grow height 10 px or 10 ppt
+        bindsym $up resize shrink height 10 px or 10 ppt
+        bindsym $right resize grow width 10 px or 10 ppt
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bar {
+        status_command i3status
+	font UbuntuMono Nerd Font Mono 7 
+}
+
+default_border pixel 0
+default_floating_border pixel 0
+
+gaps inner 5 
+gaps outer 5
+smart_gaps on
+
+exec_always xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
+exec_always xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1
+exec_always setxkbmap -model pc105 -layout us,ru -variant , -option grp:alt_shift_toggle
+exec_always xfce4-power-manager
+exec_always picom --config /home/l1l0/.config/picom/picom.conf
+exec_always feh --recursive --bg-fill --randomize ~/wall
