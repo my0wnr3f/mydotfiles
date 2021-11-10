@@ -1,4 +1,5 @@
 syntax on
+" See https://github.com/andreasvc/vim-256noir
 colorscheme 256_noir 
 set number
 set cursorline

@@ -28,13 +28,20 @@ alias mkscr='maim --select | xclip -selection clipboard -target image/png'
 
 alias scheme='scheme --eehistory off'
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 complete -F _complete_alias config
 
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
-PS1=''${pur}' \W'${grn}' \$ '${clr}''
+# This is not my piece of code, see
+# https://www.freecodecamp.org/news/bashrc-customization-guide/
+# for original thing
+function git_branch() {
+    if [ -d .git ] ; then
+        printf "%s" "($(git branch 2> /dev/null | awk '/\*/{print $2}'))";
+    fi
+}
+
+PS1=''${blu}'$(git_branch) '${pur}' \W'${grn}' \$ '${clr}''
 
 case ${TERM} in
   xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
@@ -49,7 +56,7 @@ esac
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
 export LESSHISTFILE="-"
-export GTK2_RC_FILES="/home/l1l0/.config/gtk-2.0/gtkrc-2.0"
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export HOME="/home/l1l0"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"

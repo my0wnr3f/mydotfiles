@@ -22,7 +22,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+p exec "maim --select | xclip -selection clipboard -target image/png" 
 bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+b exec --no-startup-id firefox
+bindsym $mod+b exec --no-startup-id chromium
 bindsym $mod+p exec --no-startup-id pcmanfm
 bindsym $mod+g exec --no-startup-id gimp
 bindsym $mod+z exec --no-startup-id zathura
@@ -92,5 +92,5 @@ exec_always xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled"
 exec_always xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1
 exec_always setxkbmap -model pc105 -layout us,ru -variant , -option grp:alt_shift_toggle
 exec_always xfce4-power-manager
-exec_always picom --config /home/l1l0/.config/picom/picom.conf
+exec_always picom --config ~/.config/picom/picom.conf
 exec_always feh --recursive --bg-fill --randomize ~/wall
