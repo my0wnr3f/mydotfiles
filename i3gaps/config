@@ -2,11 +2,9 @@ set $mod Mod4
 
 font pango:UbuntuMono Nerd Font Mono 12px
 
-# TODO : wtf is this? x1
 exec --no-startup-id dex --autostart --environment i3
 
-# TODO : wtf is this? x2
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 set $refresh_i3status killall -SIGUSR1 i3status
 
@@ -15,7 +13,6 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# TODO : wtf is this x3 
 floating_modifier $mod
 
 bindsym $mod+Return exec alacritty 
